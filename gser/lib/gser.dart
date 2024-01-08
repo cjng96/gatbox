@@ -11,10 +11,11 @@ final repos = [
   {'url': 'git@bitbucket.org:retailtrend/face.tracer.git', 'server': 'dev', 'branch': 'main'}
 ];
 
-String repoFolder(String url) {
+String repoFolder(String url, String branch, String server) {
   final parts = url.split('/');
   final name = parts[parts.length - 1];
-  return path.join('./work', name);
+  final nn = '$name-$server-$branch';
+  return path.join('./repos', nn);
 }
 
 void main() async {
@@ -44,7 +45,7 @@ void main() async {
       final branch = repo['branch']!;
       final server = repo['server']!;
 
-      final folder = repoFolder(url);
+      final folder = repoFolder(url, branch, server);
       print('folder: $folder');
       final fp = Directory(folder);
       if (!fp.existsSync()) {
