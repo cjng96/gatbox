@@ -184,7 +184,7 @@ class Main {
         final remoteRev = result2.stdout.split('\t')[0].trim();
 
         if (localRev == remoteRev) {
-          print('deploy skip');
+          print('deploy skip - rev:$localRev');
         } else {
           print('deploy - local:$localRev ->> remote:$remoteRev');
           // 디플로이하자

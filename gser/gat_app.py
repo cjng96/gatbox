@@ -27,9 +27,8 @@ deploy:
     - config/*my.yml
     - repos
 
-
-  sharedLinks: []
-    #- .dart_tool/
+  sharedLinks:
+    - repos/
 
 defaultVars:
   dbDocker: sql
@@ -137,6 +136,11 @@ class myGat:
                 serverOvr=dict(dkName=dkImg + "-con"),
                 varsOvr=dict(startDaemon=False, sepDk=True),
             )
+            env.copyFile("~/.gbox/id_ed25519", "/root/.ssh/id_ed25519", mode=600)
+            env.run(
+                'if [ ! -n "$(grep "^bitbucket.org " ~/.ssh/known_hosts)" ]; then ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts 2>/dev/null; fi'
+            )
+            env.run("pip3 install god-tool boto3")
 
         # 이미지는 모두 동일하고, 환경은 실행할때 변수로 주자
         my.dockerUpdateImage(
