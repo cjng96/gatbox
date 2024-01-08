@@ -74,9 +74,9 @@ class Net extends CoNet {
     // prod, dev
     // if (Setting.g.cfgDev.mode!.devServer) {
     if (Setting.g.isDevServer) {
-      lstServer.add(ServerNode('dev', 'https://gboxt.mmx.kr'));
+      lstServer.add(ServerNode('dev', 'http://gatboxt.retailtrend.net'));
     } else {
-      lstServer.add(ServerNode('prod', 'https://gbox.mmx.kr'));
+      lstServer.add(ServerNode('prod', 'http://gatbox.retailtrend.net'));
     }
   }
 

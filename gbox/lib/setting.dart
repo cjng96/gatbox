@@ -18,7 +18,7 @@ class Setting {
 
   Future init() async {
     isDev = Uri.base.queryParameters['dev'] == '1';
-    isDevServer = Uri.base.host.startsWith('kotet.');
+    isDevServer = Uri.base.host.startsWith('gatboxtt.');
 
     if (kDebugMode) {
       isDevServer = true;

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
@@ -39,6 +41,8 @@ class MyMain extends StatefulWidget {
 class MyMainState extends State<MyMain> {
   List<RepoItem>? repoList;
 
+  Timer? timer;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +54,20 @@ class MyMainState extends State<MyMain> {
       await Future.delayed(const Duration(milliseconds: 100));
     }
 
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
+      await refresh();
+    });
+
+    await refresh();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  Future refresh() async {
     final cmd = CmdList();
     final res = await Net.g.sendCmd(cmd, ResList.fromJson);
     repoList = res.repos;
@@ -58,13 +76,6 @@ class MyMainState extends State<MyMain> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
     final dtFmt = DateFormat('yyyy-MM-dd HH:mm:ss');
 
     Widget body = const Text('Loading...');
