@@ -3,7 +3,7 @@ import 'package:codart/coEmail.dart';
 import 'package:codart/coYaml.dart';
 import 'package:codart/coConfig.dart';
 
-import 'gser.dart';
+import 'main.dart';
 
 final reposCfg = [
   {'name': 'ft', 'url': 'git@bitbucket.org:retailtrend/face.tracer.git', 'server': 'dev', 'branch': 'main'}

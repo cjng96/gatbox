@@ -100,7 +100,7 @@ class Main {
   final config = Config();
 
   Future init(String? profile) async {
-    config.init(profile);
+    await config.init(profile);
 
     await config.reposInit(repos);
 
@@ -228,21 +228,21 @@ void main(List<String> args) async {
   });
   HotReloader.logLevel = logging.Level.CONFIG;
 
-  // 디버거랑도 잘 도는거 같은데?
-  // ignore: unused_local_variable
-  HotReloader? reloader;
-  // if (isInDebugMode && profile != 'unittest') {
-  reloader = await HotReloader.create(
-    debounceInterval: Duration(seconds: 2),
-    // onAfterReload: (ctx) {
-    //   print('Hot-reload result: ${ctx.result}');
-    // },
-  );
-  // }
-
   String? profile;
   if (args.isNotEmpty) {
     profile = args[0];
+  }
+
+  // 디버거랑도 잘 도는거 같은데?
+  // ignore: unused_local_variable
+  HotReloader? reloader;
+  if (isInDebugMode && profile != 'unittest') {
+    reloader = await HotReloader.create(
+      debounceInterval: Duration(seconds: 2),
+      // onAfterReload: (ctx) {
+      //   print('Hot-reload result: ${ctx.result}');
+      // },
+    );
   }
 
   final m = Main();
