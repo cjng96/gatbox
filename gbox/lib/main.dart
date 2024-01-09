@@ -69,7 +69,7 @@ class MyMainState extends State<MyMain> {
 
   Future refresh() async {
     final cmd = CmdList();
-    final res = await Net.g.sendCmd(cmd, ResList.fromJson);
+    final res = await Net.g.sendCmdR(cmd);
     repoList = res.repos;
     setState(() {});
   }

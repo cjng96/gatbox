@@ -1,6 +1,6 @@
 import 'package:codart/coNet.dart';
 
-class CmdList extends CmdBase {
+class CmdList extends CmdBase<ResList> {
   CmdList();
   factory CmdList.fromJson(Map json) {
     assert(json['type'] == type);
@@ -14,6 +14,11 @@ class CmdList extends CmdBase {
   }
 
   static const String type = 'list';
+
+  @override
+  ResList genRes(Map map) {
+    return ResList.fromJson(map);
+  }
 }
 
 class RepoItem {
