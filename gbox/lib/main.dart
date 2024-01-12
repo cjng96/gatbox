@@ -16,7 +16,7 @@ void main() {
 
   AppKey.g.initKey();
 
-  var app = MyApp(runType: RunType.prod);
+  var app = const MyApp(runType: RunType.prod);
   runApp(app);
 }
 

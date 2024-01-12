@@ -5,21 +5,6 @@ import 'package:codart/coConfig.dart';
 
 import 'main.dart';
 
-final reposCfg = [
-  {
-    'name': 'ft',
-    'url': 'git@bitbucket.org:retailtrend/face.tracer.git',
-    'server': 'dev',
-    'branch': 'main',
-  },
-  {
-    'name': 'dxm',
-    'url': ' git@bitbucket.org:retailtrend/cron.dxm.git',
-    'server': 'dev',
-    'branch': 'develop',
-  }
-];
-
 class Config extends CoConfig {
   static Config? _g;
   static Config get g => _g!;
@@ -55,8 +40,12 @@ class Config extends CoConfig {
     return conf;
   }
 
-  Future reposInit(List<RepoNode> repos) async {
-    for (final repoCfg in reposCfg) {
+  final repos = <RepoNode>[];
+  Future reposInit() async {
+    final cfg = <String, dynamic>{};
+    await yamlLoadIntoFromFile(cfg, File('./config.yml'));
+
+    for (final repoCfg in cfg['repos']) {
       final repo = RepoNode(repoCfg['name']!, repoCfg['url']!, repoCfg['branch']!, repoCfg['server']!);
       repos.add(repo);
     }

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:isolate';
 import 'dart:math';
 
+import 'package:codart/coYaml.dart';
 import 'package:codart/utils.dart';
 import 'package:hotreloader/hotreloader.dart';
 import 'package:logging/logging.dart' as logging;
@@ -16,6 +17,8 @@ import 'package:codart/coShelf.dart';
 
 import 'config.dart';
 import 'server.dart';
+
+const bool isDebugMode = !isReleaseMode && !isProfileMode;
 
 String repoFolder(String url, String branch, String server) {
   final parts = url.split('/');
@@ -92,7 +95,7 @@ class Main {
     _g = this;
     // Timer.periodic(Duration(seconds: 1), (t) => dodo());
   }
-  List<RepoNode> repos = [];
+  // List<RepoNode> repos = [];
   final cl = MyCl();
   final ll = ClLogger('main');
 
@@ -102,7 +105,7 @@ class Main {
   Future init(String? profile) async {
     await config.init(profile);
 
-    await config.reposInit(repos);
+    await config.reposInit();
 
     final route = ShelfRouter(log: true);
 
@@ -159,7 +162,7 @@ class Main {
 
   Future loop() async {
     while (true) {
-      for (final repo in repos) {
+      for (final repo in config.repos) {
         final folder = repoFolder(repo.url, repo.branch, repo.server);
         print('folder: $folder');
         final fp = Directory(folder);
