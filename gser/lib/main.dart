@@ -169,7 +169,7 @@ class Main {
         if (!fp.existsSync()) {
           print('clonning ${repo.url}');
           final result = await Process.run('git', ['clone', repo.url, folder]);
-          print('out: ${result.stdout}');
+          print('  => ${result.stdout}');
           if (result.exitCode != 0) {
             print('clone failed with error: ${result.exitCode}. ${result.stderr}');
             continue;
