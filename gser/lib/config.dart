@@ -6,7 +6,18 @@ import 'package:codart/coConfig.dart';
 import 'main.dart';
 
 final reposCfg = [
-  {'name': 'ft', 'url': 'git@bitbucket.org:retailtrend/face.tracer.git', 'server': 'dev', 'branch': 'main'}
+  {
+    'name': 'ft',
+    'url': 'git@bitbucket.org:retailtrend/face.tracer.git',
+    'server': 'dev',
+    'branch': 'main',
+  },
+  {
+    'name': 'dxm',
+    'url': ' git@bitbucket.org:retailtrend/cron.dxm.git',
+    'server': 'dev',
+    'branch': 'develop',
+  }
 ];
 
 class Config extends CoConfig {
