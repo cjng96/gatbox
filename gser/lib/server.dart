@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:codart/cl.dart';
 import 'package:codart/coShelf.dart';
 
+import 'config.dart';
 import 'main.dart';
 import 'pk.dart';
 
@@ -20,7 +21,7 @@ class MyServer {
   Future onList(ShelfContext ctx, Map<String, dynamic> pk) async {
     final cmd = CmdList.fromJson(pk);
 
-    final repos = Main.g.repos;
+    final repos = Config.g.repos;
     final res = ResList(
         repos: repos
             .map((e) => RepoItem(name: e.name, server: e.server, branch: e.branch, deployDt: e.deployDt))
